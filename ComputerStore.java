@@ -1,10 +1,6 @@
 package PartA;
 
-
-
 import java.util.Scanner;
-
-
 
 public class ComputerStore {
 
@@ -49,6 +45,7 @@ public class ComputerStore {
                     int createdcomp = Computer.findNumberOfCreatedComputers();
                     int flag1 = 0;
                     do {
+                        flag1 = 0;
                         System.out.println("How many computers you want to enter : ");
                         try {
                             compcount = kb.nextInt();
@@ -75,7 +72,7 @@ public class ComputerStore {
                                             System.out.println("An exception occurred!\n"+e);
                                             kb.nextLine();
                                         }
-                                    } while (checkNegative(price)|| price ==0);
+                                    } while (checkNegative(price)|| price == 0);
                                     inventory[i] = new Computer(brand, model, price);
                                     inventory[i].setBrand(brand);
                                     inventory[i].setModel(model);
@@ -85,6 +82,7 @@ public class ComputerStore {
                             }
                         }catch (Exception e){
                             System.out.println("An exception occurred!\n"+e);
+                            flag1++;
                             kb.nextLine();
                         }
                     } while (size <= createdcomp || flag1 != 0);
@@ -177,12 +175,14 @@ public class ComputerStore {
                                             break;
                                         default:
                                             System.out.println("Enter a number between 1 and 5");
+                                            flag2++;
                                             break;
                                     }
                                 } while (changeval != 5 );
                             }
                         }catch (Exception e){
                             System.out.println("An exception occurred!\n"+e);
+                            flag2 ++;
                             kb.nextLine();
                         }
                     } while (option == 1 || flag2 !=0);
@@ -240,7 +240,7 @@ public class ComputerStore {
     }
     public static int findComputersBy(Computer[] inventory, String brandname){
         int flag=0;
-        for (int i = 0; i < inventory.length; i++) {
+        for (int i = 0; i < Computer.findNumberOfCreatedComputers(); i++) {
             if(inventory[i].getBrand().equals(brandname)) {
                 System.out.println("Computer's information of given brand :");
                 Computer.displayComputer(inventory[i]);
