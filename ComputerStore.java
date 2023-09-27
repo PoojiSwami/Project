@@ -73,7 +73,7 @@ public class ComputerStore {
                                             kb.nextLine();
                                         }
                                     } while (checkNegative(price)|| price == 0);
-                                    inventory[i] = new Computer(brand, model, price);
+                                    inventory[i] = new Computer();
                                     inventory[i].setBrand(brand);
                                     inventory[i].setModel(model);
                                     inventory[i].setPrice(price);
