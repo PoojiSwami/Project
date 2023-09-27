@@ -210,7 +210,7 @@ public class ComputerStore {
                     }
                     break;
                 case 5:
-                    System.out.println("Thank you for visiting Computer store!! \nHope we have serverd you the best!");
+                    System.out.println("Thank you for visiting the Computer store!! \nHope we have serverd you the best!");
                     System.exit(0);
                 default:
                     System.out.println("Invalid input, Please enter a valid input");
