@@ -24,7 +24,7 @@ public class ComputerStore {
         Computer[] inventory = new Computer[size];          // creation of an array, inventory of type Computer with given size
         int mainMenu = 0;
         do {
-            System.out.println("What do you want to do?\n" +
+            System.out.println("What do you want to do?\n" +             //display main Menu
                     "1.\tEnter new computers (password required)\n" +
                     "2.\tChange information of a computer (password required)\n" +
                     "3.\tDisplay all computers by a specific brand\n" +
@@ -33,7 +33,7 @@ public class ComputerStore {
                     "Please enter your choice >\n");
             try {
                 mainMenu = kb.nextInt();
-            }catch (Exception e) {
+            }catch (Exception e) {                        // handling the invalid values of mainMenu
                 System.out.println("An exception occurred!\n" + e);
                 kb.nextLine();
             }
