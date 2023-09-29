@@ -49,22 +49,27 @@ public class ComputerStore {
                         System.out.println("How many computers you want to enter : ");
                         try {
                             compcount = kb.nextInt();
-                            if (compcount > size) {
+                        }catch (Exception e){
+                            System.out.println("An exception occurred!\n"+e);
+                            flag1++;
+                            kb.nextLine();
+                        }
+                            if (compcount > (size - createdcomp)) {
                                 System.out.println("There are only " + (size - createdcomp) + " empty spaces available. Please enter a valid number.");
                                 flag1++;
                             } else if (checkNegative(compcount)) {
                                 System.out.println("Invalid Input, please enter a positive value");
                                 flag1++;
                             } else {
-                                for (int i = createdcomp; i < compcount; i++) {
-                                    System.out.println("Enter computer" + (i + 1) + "'s brand : ");
+                                for (int i = 0; i < compcount; i++) {
+                                    System.out.println("Enter computer" + (createdcomp + i + 1) + "'s brand : ");
                                     String brand = kb.next();
-                                    System.out.println("Enter computer" + (i + 1) + "'s model : ");
+                                    System.out.println("Enter computer" + (createdcomp + i + 1) + "'s model : ");
                                     String model = kb.next();
                                     double price = 0;
                                     do {
                                         try {
-                                            System.out.println("Enter computer" + (i + 1) + "'s price : ");
+                                            System.out.println("Enter computer" + (createdcomp + i + 1) + "'s price : ");
                                             price = kb.nextDouble();
                                             if (checkNegative(price))
                                                 System.out.println("Invalid, price should be positive");
@@ -73,24 +78,20 @@ public class ComputerStore {
                                             kb.nextLine();
                                         }
                                     } while (checkNegative(price)|| price == 0);
-                                    inventory[i] = new Computer();
-                                    inventory[i].setBrand(brand);
-                                    inventory[i].setModel(model);
-                                    inventory[i].setPrice(price);
-                                    Computer.displayComputer(inventory[i]);
+                                    inventory[createdcomp+i] = new Computer();
+                                    inventory[createdcomp+i].setBrand(brand);
+                                    inventory[createdcomp+i].setModel(model);
+                                    inventory[createdcomp+i].setPrice(price);
+                                    Computer.displayComputer(inventory[createdcomp]);
                                 }
                             }
-                        }catch (Exception e){
-                            System.out.println("An exception occurred!\n"+e);
-                            flag1++;
-                            kb.nextLine();
-                        }
+                        
                     } while (size <= createdcomp || flag1 != 0);
                     break;
                 case 2:
                     if (!checkPassword())
                         break;
-                    int compnum, option = 0, changeval, flag2 = 0;
+                    int compnum, option = 0, changeval = 0, flag2 = 0;
                     do {
                         System.out.println("Enter the computer number you wish to modify : ");
                         try {
@@ -99,12 +100,12 @@ public class ComputerStore {
                                 System.out.println("Invalid, computer number should be positive");
                                 flag2++;
                             }
-                            else if (compnum > size) {
+                            else if (compnum > Computer.findNumberOfCreatedComputers()) {
                                 System.out.println("Given computer doesn't exists, you wish to" +
                                         "\n 1. enter another computer" +
                                         "\n 2. quit this operation and go back to the main menu");
                                 option = kb.nextInt();
-                                flag2++;
+                                
                             }
                             else {
                                 if (compnum != 0)
@@ -122,7 +123,12 @@ public class ComputerStore {
                                             "4.\tprice\n" +
                                             "5.\tQuit\n" +
                                             "Enter your choice >\n");
+                                    try {
                                     changeval = kb.nextInt();
+                                    }catch (Exception e){
+                                        System.out.println("An exception occurred!\n"+e);
+                                        kb.nextLine();
+                                    }
                                     switch (changeval) {
                                         case 1:
                                             System.out.println("Enter the new Brand name : ");
@@ -138,9 +144,9 @@ public class ComputerStore {
                                             break;
                                         case 3:
                                             int newSN = 0;
-                                            System.out.println("Enter the new serial number : ");
                                             do {
                                                 try {
+                                                	System.out.println("Enter the new serial number : ");
                                                     newSN = kb.nextInt();
                                                     if(checkNegative(newSN)) {
                                                         System.out.println("Enter a positive number");
@@ -155,9 +161,9 @@ public class ComputerStore {
                                             break;
                                         case 4:
                                             double newprice = 0;
-                                            System.out.println("Enter the new price : ");
                                             do {
                                                 try{
+                                                	System.out.println("Enter the new price : ");
                                                     newprice = kb.nextDouble();
                                                     if(checkNegative(newprice)) {
                                                         System.out.println("Enter a positive number");
@@ -188,26 +194,40 @@ public class ComputerStore {
                     } while (option == 1 || flag2 !=0);
                     break;
                 case 3:
-                    System.out.println("Enter Brand name : ");
+                    int flag3 = 0;
+                    do {
                     try {
+                    	flag3 = 0;
+                    	System.out.println("Enter Brand name : ");
                         String brandname = kb.next();
-                        if (findComputersBy(inventory, brandname) == 0)
+                        if (findComputersBy(inventory, brandname) == 0) {
                             System.out.println("There are no computers with the brand name as " + brandname);
-                    }catch(Exception e){
-                        System.out.println("An exception occurred!\n"+e);
-                        kb.nextLine();
+                        flag3++;
                     }
+                }catch(Exception e){
+                    System.out.println("An exception occurred!\n"+e);
+                    flag3++;
+                    kb.nextLine();
+                }
+                }while(flag3 !=0);
                     break;
                 case 4:
-                    try {
+                	int flag4 = 0;
+                    do {
+                	try {
+                		flag4 = 0;
                         System.out.println("Enter the price value to display the computers cheaper than the given price: ");
                         double pr = kb.nextDouble();
-                        if (findCheaperThan(inventory, pr) == 0)
+                        if (findCheaperThan(inventory, pr) == 0) {
                             System.out.println("There are no computers cheaper than " + pr);
+                            flag4++;
+                        }
                     }catch(Exception e){
                         System.out.println("An exception occurred!\n"+e);
+                        flag4++;
                         kb.nextLine();
                     }
+                    }while(flag4 !=0);
                     break;
                 case 5:
                     System.out.println("Thank you for visiting the Computer store!! \nHope we have serverd you the best!");
@@ -241,7 +261,7 @@ public class ComputerStore {
     public static int findComputersBy(Computer[] inventory, String brandname){
         int flag=0;
         for (int i = 0; i < Computer.findNumberOfCreatedComputers(); i++) {
-            if(inventory[i].getBrand().equals(brandname)) {
+            if(inventory[i].getBrand().equalsIgnoreCase(brandname)) {
                 System.out.println("Computer's information of given brand :");
                 Computer.displayComputer(inventory[i]);
                 flag++;
@@ -251,10 +271,10 @@ public class ComputerStore {
     }
     public static int findCheaperThan(Computer[] inventory, double pr){
         int flag = 0;
-        for (Computer ele:inventory) {
-            if(ele.getPrice() < pr){
+        for (int i = 0; i < Computer.findNumberOfCreatedComputers(); i++) {
+               if(inventory[i].getPrice() < pr){
                 System.out.println("The computer/computers cheaper than the given price:");
-                Computer.displayComputer(ele);
+                Computer.displayComputer(inventory[i]);
                 flag++;
             }
         }
