@@ -24,7 +24,7 @@ public class ComputerStore {
         Computer[] inventory = new Computer[size];          // creation of an array, inventory of type Computer with given size
         int mainMenu = 0;
         do {
-            System.out.println("What do you want to do?\n" +
+            System.out.println("What do you want to do?\n" +			//display main Menu 
                     "1.\tEnter new computers (password required)\n" +
                     "2.\tChange information of a computer (password required)\n" +
                     "3.\tDisplay all computers by a specific brand\n" +
@@ -33,16 +33,16 @@ public class ComputerStore {
                     "Please enter your choice >\n");
             try {
                 mainMenu = kb.nextInt();
-            }catch (Exception e) {
+            }catch (Exception e) {			// handling the invalid values such as strings, special characters
                 System.out.println("An exception occurred!\n" + e);
                 kb.nextLine();
             }
             int compcount = 0;
             switch (mainMenu) {
                 case 1:
-                    if (!checkPassword())
-                        break;
-                    int createdcomp = Computer.findNumberOfCreatedComputers();
+                    if (!checkPassword())      //function call of "checkPassword" and validating if its true or false
+                        break;					//it breaks if it doesn't match 
+                    int createdcomp = Computer.findNumberOfCreatedComputers();  //getting created computers count 
                     int flag1 = 0;
                     do {
                         flag1 = 0;
@@ -118,7 +118,7 @@ public class ComputerStore {
                                 
                                 do {
                                 try {
-                                    System.out.println("What information would you like to change?\n" +
+                                    System.out.println("What information would you like to change?\n" +  //display update Menu
                                             "1.\tbrand\n" +
                                             "2.\tmodel\n" +
                                             "3.\tSN\n" +
