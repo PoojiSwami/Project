@@ -91,7 +91,7 @@ public class ComputerStore {
                 case 2:
                     if (!checkPassword())
                         break;
-                    int compnum, option = 0, changeval = 0, flag2 = 0;
+                    int compnum, option = 0, changeval = 0, flag2 = 0,flag5 =0;
                     do {
                         System.out.println("Enter the computer number you wish to modify : ");
                         try {
@@ -178,7 +178,7 @@ public class ComputerStore {
                                             Computer.displayComputer(inventory[compnum]);
                                             break;
                                         case 5:
-                                            flag2 = 0;
+                                            flag5 =0;
                                             break;
                                         default:
                                             System.out.println("Enter a number between 1 and 5");
@@ -192,7 +192,7 @@ public class ComputerStore {
                             flag2 ++;
                             kb.nextLine();
                         }
-                    } while (option == 1 || flag2 !=0);
+                    } while (option == 1 || flag5 != 0);
                     break;
                 case 3:
                     int flag3 = 0;
