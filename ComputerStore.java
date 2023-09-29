@@ -24,7 +24,7 @@ public class ComputerStore {
         Computer[] inventory = new Computer[size];          // creation of an array, inventory of type Computer with given size
         int mainMenu = 0;
         do {
-            System.out.println("What do you want to do?\n" +             //display main Menu
+            System.out.println("What do you want to do?\n" +
                     "1.\tEnter new computers (password required)\n" +
                     "2.\tChange information of a computer (password required)\n" +
                     "3.\tDisplay all computers by a specific brand\n" +
@@ -33,7 +33,7 @@ public class ComputerStore {
                     "Please enter your choice >\n");
             try {
                 mainMenu = kb.nextInt();
-            }catch (Exception e) {                        // handling the invalid values of mainMenu
+            }catch (Exception e) {
                 System.out.println("An exception occurred!\n" + e);
                 kb.nextLine();
             }
@@ -115,7 +115,9 @@ public class ComputerStore {
                                         + "\nModel: " + inventory[compnum].getModel()
                                         + "\nSN: " + inventory[compnum].getSN()
                                         + "\nPrice: $" + inventory[compnum].getPrice());
+                                
                                 do {
+                                try {
                                     System.out.println("What information would you like to change?\n" +
                                             "1.\tbrand\n" +
                                             "2.\tmodel\n" +
@@ -123,7 +125,6 @@ public class ComputerStore {
                                             "4.\tprice\n" +
                                             "5.\tQuit\n" +
                                             "Enter your choice >\n");
-                                    try {
                                     changeval = kb.nextInt();
                                     }catch (Exception e){
                                         System.out.println("An exception occurred!\n"+e);
