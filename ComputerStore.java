@@ -195,40 +195,30 @@ public class ComputerStore {
                     } while (option == 1 || flag5 != 0);
                     break;
                 case 3:
-                    int flag3 = 0;
-                    do {
                     try {
-                    	flag3 = 0;
                     	System.out.println("Enter Brand name : ");
                         String brandname = kb.next();
                         if (findComputersBy(inventory, brandname) == 0) {
                             System.out.println("There are no computers with the brand name as " + brandname);
-                        flag3++;
                     }
                 }catch(Exception e){
                     System.out.println("An exception occurred!\n"+e);
-                    flag3++;
                     kb.nextLine();
                 }
-                }while(flag3 !=0);
+           
                     break;
                 case 4:
-                	int flag4 = 0;
-                    do {
                 	try {
-                		flag4 = 0;
                         System.out.println("Enter the price value to display the computers cheaper than the given price: ");
                         double pr = kb.nextDouble();
                         if (findCheaperThan(inventory, pr) == 0) {
-                            System.out.println("There are no computers cheaper than " + pr);
-                            flag4++;
+                            System.out.println("There are no computers cheaper than " + pr);   
                         }
                     }catch(Exception e){
                         System.out.println("An exception occurred!\n"+e);
-                        flag4++;
                         kb.nextLine();
                     }
-                    }while(flag4 !=0);
+                    
                     break;
                 case 5:
                     System.out.println("Thank you for visiting the Computer store!! \nHope we have serverd you the best!");
