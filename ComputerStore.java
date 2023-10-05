@@ -24,10 +24,12 @@ public class ComputerStore {
                 kb.nextLine();
             }
         } while (checkNegative(size));
-        Computer[] inventory = new Computer[size];          // creation of an array, inventory of type Computer with given size
+        // Create an array 'inventory' to hold Computer objects based on the given size
+        Computer[] inventory = new Computer[size];
+        // Main menu options and functionality
         int mainMenu = 0;
         do {
-            System.out.println("What do you want to do?\n" +			//display main Menu
+            System.out.println("What do you want to do?\n" +
                     "1.\tEnter new computers (password required)\n" +
                     "2.\tChange information of a computer (password required)\n" +
                     "3.\tDisplay all computers by a specific brand\n" +
@@ -40,12 +42,13 @@ public class ComputerStore {
                 System.out.println("An exception occurred!\n" + e);
                 kb.nextLine();
             }
+            // Variable to store the number of computers to be entered
             int compcount = 0;
             switch (mainMenu) {
                 case 1:
-                    if (!checkPassword())      //function call of "checkPassword" and validating if its true or false
-                        break;					//it breaks if it doesn't match
-                    int createdcomp = Computer.findNumberOfCreatedComputers();  //getting created computers count
+                    if (!checkPassword())      // Call the "checkPassword" function and validate if it's true or false
+                        break;					// Break if it doesn't match
+                    int createdcomp = Computer.findNumberOfCreatedComputers();  // Get the count of created computers
                     int flag1 = 0;
                     do {
                         flag1 = 0;
@@ -57,6 +60,7 @@ public class ComputerStore {
                             flag1++;
                             kb.nextLine();
                         }
+                        // Validating the number of computers to be entered
                         if (compcount > (size - createdcomp)) {
                             System.out.println("There are only " + (size - createdcomp) + " empty spaces available. Please enter a valid number.");
                             flag1++;
@@ -65,6 +69,7 @@ public class ComputerStore {
                             flag1++;
                         } else {
                             for (int i = 0; i < compcount; i++) {
+                                // Get computer details and store them in the inventory array
                                 System.out.println("Enter computer" + (createdcomp + i + 1) + "'s brand : ");
                                 String brand = kb.next();
                                 System.out.println("Enter computer" + (createdcomp + i + 1) + "'s model : ");
@@ -81,10 +86,12 @@ public class ComputerStore {
                                         kb.nextLine();
                                     }
                                 } while (checkNegative(price)|| price == 0);
+                                // Create a new Computer object and set its details
                                 inventory[createdcomp+i] = new Computer();
                                 inventory[createdcomp+i].setBrand(brand);
                                 inventory[createdcomp+i].setModel(model);
                                 inventory[createdcomp+i].setPrice(price);
+                                // Display the computer details
                                 Computer.displayComputer(inventory[createdcomp]);
                             }
                         }
@@ -233,8 +240,10 @@ public class ComputerStore {
                 default:
                     System.out.println("Invalid input, Please enter a valid input");
             }
+            // Looping until the user chooses to quit
         } while (mainMenu != 5);
     }
+    // Function to check the password
     public static boolean checkPassword(){
         Scanner kb = new Scanner(System.in);
         String psd;
@@ -251,11 +260,13 @@ public class ComputerStore {
         } while (loopCount < 3);
         return false;
     }
+    // Function to check if a number is negative
     public static boolean checkNegative(double num){
         if (num <= 0)
             return true;
         return false;
     }
+    // Function to find computers by brand name
     public static int findComputersBy(Computer[] inventory, String brandname){
         int flag=0;
         for (int i = 0; i < Computer.findNumberOfCreatedComputers(); i++) {
@@ -267,6 +278,7 @@ public class ComputerStore {
         }
         return flag;
     }
+    // Function to find computers cheaper than a given price
     public static int findCheaperThan(Computer[] inventory, double pr){
         int flag = 0;
         for (int i = 0; i < Computer.findNumberOfCreatedComputers(); i++) {
